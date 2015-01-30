@@ -1,7 +1,7 @@
 {
   "name": "nodebb-plugin-reddcoin",
   "version": "0.0.1",
-  "description": "A starter kit for quickly creating NodeBB plugins",
+  "description": "A Reddcoin tipping platform for NodeBB",
   "main": "library.js",
   "repository": {
     "type": "git",
