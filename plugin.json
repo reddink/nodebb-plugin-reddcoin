@@ -1,7 +1,7 @@
 {
 	"id": "nodebb-plugin-reddcoin",
-	"name": "Plugin for tipping Reddcoin",
-	"description": "Plugin for tipping Reddcoin",
+	"name": "Reddcoin",
+	"description": "Reddcoin Tipping Plugin.",
 	"url": "https://github.com/reddink/nodebb-plugin-reddcoin",
 	"library": "./library.js",
 	"hooks": [
@@ -9,17 +9,24 @@
 			"hook": "static:app.load", "method": "init"
 		},
 		{
+			"hook": "filter:user.settings", "method": "addUserSettings"
+		},
+		{
+			"hook": "filter:user.getSettings", "method": "getUserSettings"
+		},
+		{
+			"hook": "action:user.saveSettings", "method": "saveUserSettings"
+		},
+		{
+			"hook": "filter:header.build", "method": "addNavigation"
+		},
+		{
 			"hook": "filter:admin.header.build", "method": "addAdminNavigation"
+		},
+		{
+			"hook": "filter:admin.scripts.get", "method": "addAdminScripts"
 		}
 	],
-	"staticDirs": {
-		"static": "./static"
-	},
-	"less": [
-		"static/style.less"
-	],
-	"scripts": [
-		"static/lib/main.js"
-	],
-	"templates": "static/templates"
+	"staticDir": "./public",
+	"templates": "./templates"
 }

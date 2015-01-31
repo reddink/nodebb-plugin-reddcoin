@@ -1,46 +1,64 @@
-"use strict";
+(function(module) {
+	"use strict";
 
-var plugin = {};
+	var Plugin = {};
+	
 
-plugin.init = function(params, callback) {
-	console.log('nodebb-plugin-reddcoin: loaded');
+	/* TODO
 
-	var app = params.router,
-		middleware = params.middleware,
-		controllers = params.controllers;
-		
-	// We create two routes for every view. One API call, and the actual route itself.
-	// Just add the buildHeader middleware to your route and NodeBB will take care of everything for you.
+	filter:uploadImage
+	filter:widgets.getAreas
+	filter:widgets.getWidgets
+	filter:search.query
+	filter:post.parse
+	filter:messaging.parse
+	filter:scripts.get
+	filter:sounds.get
+	filter:post.save
+	filter:post.get
+	filter:post.getPosts
+	filter:posts.custom_profile_info
+	filter:post.getFields
+	filter:post.parse
+	filter:uploadFile
+	filter:register.check
+	filter:auth.init
+	filter:composer.help
+	filter:topic.thread_tools
+	filter:user.create
+	filter:widget.render
 
-	app.get('/admin/plugins/reddcoin', middleware.admin.buildHeader, renderAdmin);
-	app.get('/api/admin/plugins/reddcoin', renderAdmin);
+	action:email.send
+	action:plugin.deactivate
+	action:plugin.activate
+	action:post.save
+	action:post.setField
+	action:topic.edit
+	action:post.edit
+	action:post.delete
+	action:post.restore
+	action:config.set
+	action:topic.save
+	action:user.create
+	action:post.delete
+	action:topic.delete
+	*/
 
-	callback();
-};
-
-plugin.addAdminNavigation = function(header, callback) {
-	header.plugins.push({
-		route: '/plugins/reddcoin',
-		icon: 'fa-tint',
-		name: 'Reddcoin'
-	});
-
-	callback(null, header);
-};
+	// static:app.load
+	Plugin.init = function(params, callback) {
+		var app = params.router,
+			middleware = params.middleware,
+			controllers = params.controllers;
+			
+		require('./lib/customRoutes')(app, middleware, controllers);
+		require('./lib/adminPage')(app, middleware, controllers);
+		callback();
+	};
 
 
-function renderAdmin(req, res, next) {
-	/*
-	Make sure the route matches your path to template exactly.
-
-	If your route was:
-		myforum.com/some/complex/route/
-	your template should be:
-		templates/some/complex/route.tpl
-	and you would render it like so:
-		res.render('some/complex/route');    */
-
-	res.render('admin/plugins/reddcoin', {});
-}
-
-module.exports = plugin;
+	require('./lib/nodebb');
+	require('./lib/userSettings')(Plugin);
+	require('./lib/menuItems')(Plugin);
+	require('./lib/clientScripts')(Plugin);
+	module.exports = Plugin;
+}(module));

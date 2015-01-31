@@ -1,8 +1,11 @@
 {
   "name": "nodebb-plugin-reddcoin",
   "version": "0.0.1",
-  "description": "A Reddcoin tipping platform for NodeBB",
+  "description": "Reddcoin Tipping Plugin",
   "main": "library.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/reddink/nodebb-plugin-reddcoin"
@@ -10,16 +13,15 @@
   "keywords": [
     "nodebb",
     "plugin",
-    "quickstart",
-    "shell"
+    "reddcoin",
+    "tipping"
   ],
   "author": {
-    "name": "Redd inK",
+    "name": "redd",
     "email": "redd@redd.ink"
   },
   "license": "BSD-2-Clause",
   "bugs": {
     "url": "https://github.com/reddink/nodebb-plugin-reddcoin/issues"
-  },
-  "readmeFilename": "README.md"
+  }
 }
