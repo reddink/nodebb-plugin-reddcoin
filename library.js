@@ -58,7 +58,7 @@
 
 	require('./lib/nodebb');
 	require('./lib/userSettings')(Plugin);
-	require('./lib/menuItems')(Plugin);
+//	require('./lib/menuItems')(Plugin);
 	require('./lib/clientScripts')(Plugin);
 	module.exports = Plugin;
 }(module));

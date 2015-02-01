@@ -21,7 +21,7 @@ module.exports = function(Plugin) {
 		header.plugins.push({
 			route: '/kitchen-sink',
 			icon: 'fa-tint',
-			name: 'Kitchen Sink'
+			name: 'Redd Kitchen Sink'
 		});
 
 		callback(null, header);
