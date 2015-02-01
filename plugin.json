@@ -18,6 +18,9 @@
 			"hook": "action:user.saveSettings", "method": "saveUserSettings"
 		},
 		{
+			"hook": "filter:posts.custom_profile_info", "method": "addProfileInfo"
+		},
+		{
 			"hook": "filter:header.build", "method": "addNavigation"
 		},
 		{
@@ -27,6 +30,8 @@
 			"hook": "filter:admin.scripts.get", "method": "addAdminScripts"
 		}
 	],
+
 	"staticDir": "./public",
-	"templates": "./templates"
+	"templates": "./templates",
+	"images": "./images"	
 }
