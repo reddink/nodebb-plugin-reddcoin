@@ -7,8 +7,10 @@ module.exports = function(Plugin) {
 			[
 				{
 					route: '/demo',
-					class: '',
-					text: "Redd Kitchen Sink"
+					class: 'fa fa-fw fa-clock-o',
+					title: 'Tipping History'
+//					text: "Reddcoin Tipping"
+
 				}
 			]
 		);
@@ -19,9 +21,9 @@ module.exports = function(Plugin) {
 	// filter:admin.header.build
 	Plugin.addAdminNavigation = function(header, callback) {
 		header.plugins.push({
-			route: '/kitchen-sink',
+			route: '/reddcoin-admin',
 			icon: 'fa-tint',
-			name: 'Redd Kitchen Sink'
+			name: 'Reddcoin Tipping'
 		});
 
 		callback(null, header);

@@ -27,6 +27,7 @@
 	filter:topic.thread_tools
 	filter:user.create
 	filter:widget.render
+	filter:user.profileLinks
 
 	action:email.send
 	action:plugin.deactivate
@@ -58,7 +59,15 @@
 
 	require('./lib/nodebb');
 	require('./lib/userSettings')(Plugin);
-//	require('./lib/menuItems')(Plugin);
+	require('./lib/menuItems')(Plugin);
 	require('./lib/clientScripts')(Plugin);
+	require('./lib/profileMenu')(Plugin);
+
+// routing for tipping history
+	Plugin.changeClientRouting = function (config, callback){
+		config.custom_mapping['^user/[.^\/]*history'] = 'account/history';
+		callback(null, config);
+	}
+
 	module.exports = Plugin;
 }(module));

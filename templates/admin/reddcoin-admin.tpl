@@ -1,4 +1,4 @@
-<h1>Sample Admin Page</h1>
+<h1>Reddcoin Admin Page</h1>
 <hr />
 
 <form>

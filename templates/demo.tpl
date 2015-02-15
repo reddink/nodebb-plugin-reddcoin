@@ -1,9 +1,9 @@
-<h1>Here is my Redd Kitchen Sink Demo</h1>
+<h1>Demo of Reddcoin Tips</h1>
 
-<span>works perfectably.</span>
+<span>Accounts are working perfectably.</span>
 <hr />
 
-Developers of Redd NodeBB
+List of your tips
 <ul>
 	<!-- BEGIN test -->
 	<li>

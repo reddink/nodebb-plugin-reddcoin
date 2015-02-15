@@ -4,6 +4,14 @@
 	"description": "Reddcoin Tipping Plugin.",
 	"url": "https://github.com/reddink/nodebb-plugin-reddcoin",
 	"library": "./library.js",
+	"staticDirs": {
+		"static": "./static",
+		"images": "graphics"
+ 		},
+	"less": [
+		"./styles/style.less"
+		],
+	"templates": "./templates",
 	"hooks": [
 		{
 			"hook": "static:app.load", "method": "init"
@@ -18,6 +26,9 @@
 			"hook": "action:user.saveSettings", "method": "saveUserSettings"
 		},
 		{
+			"hook": "filter:user.profileLinks", "method": "addUserProfileLinks"
+		},
+		{
 			"hook": "filter:posts.custom_profile_info", "method": "addProfileInfo"
 		},
 		{
@@ -29,9 +40,7 @@
 		{
 			"hook": "filter:admin.scripts.get", "method": "addAdminScripts"
 		}
-	],
+	]
 
-	"staticDir": "./public",
-	"templates": "./templates",
-	"images": "./images"	
+	
 }

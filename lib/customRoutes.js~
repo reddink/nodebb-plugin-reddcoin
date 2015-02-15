@@ -6,7 +6,7 @@ var db = require('./nodebb').db;
 function renderCrypto(req, res, next){
 
 
-			db.getObjectField('user:' + req.user.uid + ':settings', 'nodebb-plugin-reddcoin:address', function(err, title) {
+			db.getObjectField('user:' + req.user.uid + ':settings', 'nodebb-plugin-reddcoin:address', function(err, address) {
 			if (err) {
 				callback(err);
 			}
@@ -15,7 +15,7 @@ function renderCrypto(req, res, next){
 		console.log(' Make API');
 
 			res.json({
-				address: 'data.settings.address'
+				address: address
 			});	
 
 		});
@@ -36,6 +36,32 @@ function renderSink(req, res, next) {
 	res.render('demo', {
 		test: [
 			{
+				"name": "redd",
+				"amount": "10000"
+			},
+			{
+				"name": "gnasher",
+				"amount": "50000"
+			}
+
+		]
+	});
+}
+
+function renderHistory(req, res, next) {
+	/*
+	Make sure the route matches your path to template exactly.
+
+	If your route was:
+		myforum.com/some/complex/route/
+	your template should be:
+		templates/some/complex/route.tpl
+	and you would render it like so:
+		res.render('some/complex/route');    */
+
+	res.render('history', {
+		test: [
+			{
 				"name": "redd"
 			},
 			{
@@ -46,7 +72,6 @@ function renderSink(req, res, next) {
 	});
 }
 
-
 module.exports = function(app, middleware, controllers) {
 	// We create two routes for every view. One API call, and the actual route itself.
 	// Just add the buildHeader middleware to your route and NodeBB will take care of everything for you.
@@ -54,4 +79,6 @@ module.exports = function(app, middleware, controllers) {
 	app.get('/demo', middleware.buildHeader, renderSink);
 	app.get('/api/demo', renderSink);
 	app.get('/api/crypto',renderCrypto);
+	app.get('/user/:userslug/history', middleware.buildHeader, renderHistory);
+	app.get('/api/user/:userslug/history', renderHistory);
 };

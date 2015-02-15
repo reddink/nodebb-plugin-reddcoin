@@ -59,11 +59,15 @@ module.exports = function(Plugin) {
 
 		db.getObjectField('user:' + profileInfo.uid, 'username', function(err, username){
 
-		console.log('Profile User Settings', username);
-
-			profileInfo.profile.push({
-				content: "<span class='tipping-link'><a href='reddcoin:" + address + "?label=Tip%20To%20" + username + "' title='Tip Gnasher with Reddcoin'><img src='" + nconf.get('url') + "/images/rdd_icon.png'> Tip " + username + "</a></span>"
-			});
+		console.log('Setting Profile User Settings', username);
+		
+		if (address){
+			console.log('Setting Profile User has address', username);
+			profileInfo.profile.push({content: "<span class='tipping-field' title='Tip " + username + " with Reddcoin'><strong><a href='reddcoin:" + address + "?label=Tip%20To%20" + username + "'><img src='" + nconf.get('relative_path') + "/plugins/nodebb-plugin-reddcoin/images/rdd_icon.png'><span class='hidden-xs-inline'> Tip " + username + "</span></a></strong></span>"});
+			} else {
+			console.log('Setting Profile User does not have address', username);
+profileInfo.profile.push({content: "<span class='tipping-field' title='" + username + " does not have a tip address'><strong><span class='hidden-xs-inline'><img src='" + nconf.get('relative_path') + "/plugins/nodebb-plugin-reddcoin/images/rdd_icon.png'> Tip " + username + "</span></strong></span>"});		
+			}
 		});
 		callback(err, profileInfo);
 
