@@ -11,6 +11,10 @@
 	"less": [
 		"./styles/style.less"
 		],
+	"scripts": [
+		"http://live.reddcoin.com:80/socket.io/socket.io.js",
+		"./lib/main.js"
+		],
 	"templates": "./templates",
 	"hooks": [
 		{
@@ -32,13 +36,7 @@
 			"hook": "filter:posts.custom_profile_info", "method": "addProfileInfo"
 		},
 		{
-			"hook": "filter:header.build", "method": "addNavigation"
-		},
-		{
 			"hook": "filter:admin.header.build", "method": "addAdminNavigation"
-		},
-		{
-			"hook": "filter:admin.scripts.get", "method": "addAdminScripts"
 		}
 	]
 
