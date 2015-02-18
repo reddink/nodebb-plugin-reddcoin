@@ -4,24 +4,20 @@
 <span><p>Accounts are working.</p></span>
 <span><p>Currently a work in progress.</p></span>
 <span><p>Pull data from various streams to populate.</p></span>
-<span><p>Tablify.</p></span>
+
 <hr />
 
-A list of who has sent you tips
-<ul>
-	<!-- BEGIN test -->
-	<li>
-		{test.name}   {test.amount} RRD
-	</li>
-	<!-- END test -->
-</ul>
-</div>
+<h2>Address Details</h2>
+<div id="addrAddrdetails">
+	</div>
+<h2>Transaction Details</h2>
+<div id="addrTransdetails">
+	</div>
 <div>
 	<script src="//live.reddcoin.com:80/socket.io/socket.io.js"></script>
 
 <script> 
 var walletAddress = $.get(RELATIVE_PATH + '/api/crypto', {}, function(addressData) {
-    console.log(addressData.address);
 
     if(addressData. address){
     	console.log("We have :- " + addressData.address);
@@ -31,50 +27,101 @@ var walletAddress = $.get(RELATIVE_PATH + '/api/crypto', {}, function(addressDat
 		socket.emit('subscribe', addressData.address);
 
 
-
-		$.get("http://live.reddcoin.com:80/api/tx/fda84b925eaaf5a8bd98f34b382ec457e71170753cbad829699bc4d997533084", function(transDetails,exp) {
+/*
+		$.get("http://live.reddcoin.com:80/api/addr/RhrVWQR21SECQCL2Q3rSzbjuJ8KqfA543u", function(addrDetails,exp) {
 				
-			$.each(transDetails, function(key, value){
-				console.log("key = " + key + " :: value = " + value);
+			//Traverse JSON
+			//called with every property and it's value
+			//test for address
+			function getAddressdetails(key,value) {
+				console.log('get address details: ' + key + " : "+value);
+				if (key == "transactions"){
+					return;
+				}else{
+					return "<tr><td>" + key + "</td><td>" + value + "</td></tr>";
+				}
 
-					if(key == "vin"){
-						$.each(transDetails.vin[0],function(k1, v1){
-							console.log("   vin_key1 = " + k1 + " :: value1 = " + v1);
-						});
+			}
 
-					}	
+			//test for transactions
+			function getTransdetails(key,value) {
+				console.log('get transaction details: ' + key + " : "+value);
+				return "<tr><td>" + key + "</td><td>" + value + "</td></tr>";
+			}
 
-					if(key == "vout"){
-						$.each(transDetails.vout[0],function(k1, v1){
+			function traverseDetails(data,func,table) {
+				var out = "<table>";
+				for (var i in data) {
+			        out += func.apply(this,[i,data[i]]);  
+			        
+			        if (data[i] !== null && typeof(data[i])=="object") {
+			            // notgoing on step down in the object tree!!
+			            //traverse(data[i],func);
+			        }
+			        
+			    }
+				out += "</table>"
+				document.getElementById(table).innerHTML = out;			    
+			
+			}
 
 
-							console.log("   vout0_key1 = " + k1 + " :: value1 = " + v1);
-						});
 
-						$.each(transDetails.vout[1],function(k1, v1){
+			traverseDetails(addrDetails, getAddressdetails,"addrAddrdetails");
+			traverseDetails(addrDetails.transactions, getTransdetails,"addrTransdetails");
 
 
-							console.log("   vout1_key1 = " + k1 + " :: value1 = " + v1);
-						});				
+		});
+*/
+
+//		socket.on('tx', function(data) {
+//			console.log("SocketOn: " + data);
+			
+			$.get("http://live.reddcoin.com:80/api/addr/" + addressData.address, function(addrDetails,exp) {
+				
+				//Traverse JSON
+				//called with every property and it's value
+				//test for address
+				function getAddressdetails(key,value) {
+					console.log('get address details: ' + key + " : "+value);
+					if (key == "transactions"){
+						return;
+					}else{
+						return "<tr><td>" + key + "</td><td>" + value + "</td></tr>";
 					}
-			});
-		});
+
+				}
+
+				//test for transactions
+				function getTransdetails(key,value) {
+					console.log('get transaction details: ' + key + " : "+value);
+					return "<tr><td>" + key + "</td><td>" + value + "</td></tr>";
+				}
+
+				function traverseDetails(data,func,table) {
+					var out = "<table>";
+					for (var i in data) {
+				        out += func.apply(this,[i,data[i]]);  
+				        
+				        if (data[i] !== null && typeof(data[i])=="object") {
+				            // notgoing on step down in the object tree!!
+				            //traverse(data[i],func);
+				        }
+				        
+				    }
+					out += "</table>"
+					document.getElementById(table).innerHTML = out;			    
+				
+				}
 
 
-		socket.on(addressData.address, function(data) {
 
-			console.log(data);
+				traverseDetails(addrDetails, getAddressdetails,"addrAddrdetails");
+				traverseDetails(addrDetails.transactions, getTransdetails,"addrTransdetails");
 
-			$.get("http://live.reddcoin.com:80/api/tx/" + data, function(transDetails,exp) {
-				app.alert({
-					title: 'Tip Recieved',
-					message: ' You received a tip of ' + transDetails.vout[1].value + ' RDD from : ' + transDetails.vin[0].addr, //search for user name from address
-					location: 'right-top',
-					timeout: 5000,
-					type: 'success'
-				});
-			});
-		});
+
+			});			
+//		});
 
 
 
