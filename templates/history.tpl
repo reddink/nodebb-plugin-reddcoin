@@ -1,19 +1,17 @@
-<div>
-<h1>History of Reddcoin Tips</h1>
 
-<span><p>Accounts are working.</p></span>
-<span><p>Currently a work in progress.</p></span>
-<span><p>Pull data from various streams to populate.</p></span>
-
-<hr />
-
-<h2>Address Details</h2>
-<div id="addrAddrdetails">
+<div class='col-md-12 reddcoin-history'>
+	<div class='well'>
+		<h1>Reddcoin Tip History</h1>
+		<h2>Address Details</h2>
+			<div id="addrAddrdetails"></div>
 	</div>
-<h2>Transaction Details</h2>
-<div id="addrTransdetails">
+
+	<div class='well'>
+		<h2>Transaction Details</h2>
+			<div id="addrTransdetails"></div>
 	</div>
 <div>
+	
 	<script src="//live.reddcoin.com:80/socket.io/socket.io.js"></script>
 
 <script> 
@@ -74,9 +72,9 @@ var walletAddress = $.get(RELATIVE_PATH + '/api/crypto', {}, function(addressDat
 		});
 */
 
-//		socket.on('tx', function(data) {
-//			console.log("SocketOn: " + data);
-			
+/*		socket.on('tx', function(data) {
+			console.log("SocketOn: " + data);
+*/			
 			$.get("http://live.reddcoin.com:80/api/addr/" + addressData.address, function(addrDetails,exp) {
 				
 				//Traverse JSON
@@ -99,7 +97,8 @@ var walletAddress = $.get(RELATIVE_PATH + '/api/crypto', {}, function(addressDat
 				}
 
 				function traverseDetails(data,func,table) {
-					var out = "<table>";
+					var out;
+					out = "<table>";
 					for (var i in data) {
 				        out += func.apply(this,[i,data[i]]);  
 				        
@@ -114,9 +113,19 @@ var walletAddress = $.get(RELATIVE_PATH + '/api/crypto', {}, function(addressDat
 				
 				}
 
+				function addressDetails(data,table){
+					var out;
+					out = "<table>";
+					out += "<tr><td>Address</td><td>" + data.addrStr + "</td></tr>";
+					out += "<tr><td>Balance</td><td>" + data.balance + "</td></tr>";
+					out += "<tr><td>Total Received</td><td>" + data.totalReceived + "</td></tr>";
+					out += "<tr><td>Total Sent</td><td>" + data.totalSent + "</td></tr>";
+					out += "</table>";
+					document.getElementById(table).innerHTML = out;
+				}
+				addressDetails(addrDetails, "addrAddrdetails");
 
-
-				traverseDetails(addrDetails, getAddressdetails,"addrAddrdetails");
+				//traverseDetails(addrDetails, getAddressdetails,"addrAddrdetails");
 				traverseDetails(addrDetails.transactions, getTransdetails,"addrTransdetails");
 
 
