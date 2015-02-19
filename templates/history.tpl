@@ -8,17 +8,17 @@
 
 	<div class='well'>
 		<h2>Transaction Details</h2>
+		<p> WIP. Extract tx details into meaningful details</p>
 			<div id="addrTransdetails"></div>
 	</div>
 <div>
 	
-	<script src="//live.reddcoin.com:80/socket.io/socket.io.js"></script>
 
 <script> 
 var walletAddress = $.get(RELATIVE_PATH + '/api/crypto', {}, function(addressData) {
 
     if(addressData. address){
-    	console.log("We have :- " + addressData.address);
+    	console.log("History. We have Addr:- " + addressData.address);
 
     	var socket = io("http://live.reddcoin.com:80/");
 
@@ -113,6 +113,24 @@ var walletAddress = $.get(RELATIVE_PATH + '/api/crypto', {}, function(addressDat
 				
 				}
 
+				function transactionDetails(data, func, table){
+					var out;
+					out = "<table>";
+					out += "<tr><td>Count</td><td>Transaction</td></tr>";
+					for (var i in data) {
+				        out += func.apply(this,[i,data[i]]);  
+				        
+				        if (data[i] !== null && typeof(data[i])=="object") {
+				            // notgoing on step down in the object tree!!
+				            //traverse(data[i],func);
+				        }
+				        
+				    }
+					out += "</table>"
+					document.getElementById(table).innerHTML = out;
+
+				}
+
 				function addressDetails(data,table){
 					var out;
 					out = "<table>";
@@ -123,10 +141,12 @@ var walletAddress = $.get(RELATIVE_PATH + '/api/crypto', {}, function(addressDat
 					out += "</table>";
 					document.getElementById(table).innerHTML = out;
 				}
-				addressDetails(addrDetails, "addrAddrdetails");
+				
 
+				addressDetails(addrDetails, "addrAddrdetails");
+				transactionDetails(addrDetails.transactions, getTransdetails, "addrTransdetails");
 				//traverseDetails(addrDetails, getAddressdetails,"addrAddrdetails");
-				traverseDetails(addrDetails.transactions, getTransdetails,"addrTransdetails");
+				//traverseDetails(addrDetails.transactions, getTransdetails,"addrTransdetails");
 
 
 			});			
