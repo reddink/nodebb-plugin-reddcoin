@@ -8,8 +8,7 @@
 
 	<div class='well'>
 		<h2>Transaction Details</h2>
-		<p> WIP. Extract tx and meaningful details</p>
-		<p> count, amount and date ++ hopefully can get the user who sent :)</p>
+
 			<div id="addrTransdetails"></div>
 	</div>
 <div>
@@ -31,7 +30,7 @@ var walletAddress = $.get(RELATIVE_PATH + '/api/crypto', {}, function(addressDat
 					outAddr = "<table>";
 					outAddr += "<tr><td>Address</td><td>" + data.addrStr + "</td></tr>";
 					outAddr += "<tr><td>Balance</td><td>" + data.balance + "</td></tr>";
-					outAddr += "<tr><td>Total Received</td><td>" + data.totalReceived + "</td></tr>";
+					outAddr += "<tr><tdTotal Received</td><td>" + data.totalReceived + "</td></tr>";
 					outAddr += "<tr><td>Total Sent</td><td>" + data.totalSent + "</td></tr>";
 					outAddr += "</table>";
 					document.getElementById(table).innerHTML = outAddr;
@@ -59,15 +58,16 @@ var walletAddress = $.get(RELATIVE_PATH + '/api/crypto', {}, function(addressDat
 					cell1.className = 'tip_hcell';
 					var cell2= row.insertCell(1);
 					cell2.className = 'tip_hcell';
+					// Need to work on
+					//var cell3= row.insertCell(2);
+					//cell3.className = 'tip_hcell';
 					var cell3= row.insertCell(2);
 					cell3.className = 'tip_hcell';
-					var cell4= row.insertCell(3);
-					cell4.className = 'tip_hcell';
 
 					cell1.innerHTML = "  ";
 					cell2.innerHTML = "Value";
-					cell3.innerHTML = "From (if known)";
-					cell4.innerHTML = "Date";
+					//cell3.innerHTML = "From (if known)";
+					cell3.innerHTML = "Date";
 					
 					var tBody = document.createElement('tbody');
 					tbl.appendChild(tBody);
@@ -88,12 +88,12 @@ var walletAddress = $.get(RELATIVE_PATH + '/api/crypto', {}, function(addressDat
 
 					//test for transactions.
 					function getTransdetails(key,value) {
-						console.log('get transaction details: ' + key + " : " + value);
+						//console.log('get transaction details: ' + key + " : " + value);
 						var transDetails;
 						
 						$.get("http://live.reddcoin.com:80/api/tx/" + value, function(txDetails,exp){
 							
-							console.log('txDetails = ' + txDetails.time);
+							//console.log('txDetails = ' + txDetails.time);
 						
 							//traverse each vout to get the correct value for receiving address
 							var vOut = 0;
@@ -114,13 +114,13 @@ var walletAddress = $.get(RELATIVE_PATH + '/api/crypto', {}, function(addressDat
 							var body = table.tBodies[0];
 							var row = body.insertRow(-1);
 							row.insertCell(0).innerHTML = key;
-								row.cells[0].className = "tip_cell";
+								row.cells[0].className = "tip_cell ";
 							row.insertCell(1).innerHTML = txDetails.vout[vOut].value + " RDD";
 								row.cells[1].className = "tip_cell";
-							row.insertCell(2).innerHTML = '';
+							//row.insertCell(2).innerHTML = '';
+							//	row.cells[2].className = "tip_cell";
+							row.insertCell(2).innerHTML = "<a href='http://live.reddcoin.com/tx/" + txDetails.txid + "'>" + date + "</a>";
 								row.cells[2].className = "tip_cell";
-							row.insertCell(3).innerHTML = "<a href='http://live.reddcoin.com/tx/" + txDetails.txid + "'>" + date + "</a>";
-								row.cells[3].className = "tip_cell";
 							
 				    		sortTable("mytxdata");
 								
