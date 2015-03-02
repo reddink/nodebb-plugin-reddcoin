@@ -1,25 +1,14 @@
 <h1>Reddcoin Admin Page</h1>
 <hr />
 
-<form>
-	<p>
-		Adjust these settings. You can then retrieve these settings in code via:
-		<code>meta.config['sample:setting1']</code> and <code>meta.config['sample:setting2']</code>
-	</p><br />
-	<div class="alert alert-info">
-		<p>
-			<label for="Setting 1">Setting 1</label>
-			<input type="text" data-field="sample:setting1" title="Setting 1" class="form-control" placeholder="Setting 1"><br />
-			<label for="Setting 2">Setting 2</label>
-			<input type="text" data-field="sample:setting2" title="Setting 2" class="form-control" placeholder="Setting 2">
-		</p>
+
+
+<div class='col-md-12 admin-credits'>
+	<div class='well'>
+		<p class="credit">Credits</p>
+		<p class="credit">Original Tipping Plugin created by <a href='https://github.com/reddink/nodebb-plugin-reddcoin'>ReddInk</a></p>
+		<p class="credit">RDD: <a href='reddcoin:RnygCADxGF45Rd171ujeB3SRhc6YMhJzpJ'>RnygCADxGF45Rd171ujeB3SRhc6YMhJzpJ</a> BTC: <a href='bitcoin:16WX3Y92Eh5BDDZ7YdbdPw5wYvV5KGQE94'>16WX3Y92Eh5BDDZ7YdbdPw5wYvV5KGQE94</a></p>
 	</div>
-</form>
+</div>
 
-<button class="btn btn-lg btn-primary" id="save">Save</button>
 
-<script>
-	require(['admin/settings'], function(Settings) {
-		Settings.prepare();
-	});
-</script>
