@@ -27,7 +27,7 @@ var walletAddress = $.get(RELATIVE_PATH + '/api/crypto', {}, function(addressDat
     	console.log("History. We have Addr:- " + addressData.address);
 
 			
-			var transActions = $.get("http://live.reddcoin.com:80/api/addr/" + addressData.address, function(addrDetails,exp) {
+			var transActions = $.get("https://livessl.reddcoin.com:443/api/addr/" + addressData.address, function(addrDetails,exp) {
 				
 
 
