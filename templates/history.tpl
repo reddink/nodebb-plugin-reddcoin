@@ -97,7 +97,7 @@ var walletAddress = $.get(RELATIVE_PATH + '/api/crypto', {}, function(addressDat
 						//console.log('get transaction details: ' + key + " : " + value);
 						var transDetails;
 						
-						$.get("http://live.reddcoin.com:80/api/tx/" + value, function(txDetails,exp){
+						$.get("https://livessl.reddcoin.com:80/api/tx/" + value, function(txDetails,exp){
 							
 							//console.log('txDetails = ' + txDetails.time);
 						
@@ -125,7 +125,7 @@ var walletAddress = $.get(RELATIVE_PATH + '/api/crypto', {}, function(addressDat
 								row.cells[1].className = "tip_cell";
 							//row.insertCell(2).innerHTML = '';
 							//	row.cells[2].className = "tip_cell";
-							row.insertCell(2).innerHTML = "<a href='http://live.reddcoin.com/tx/" + txDetails.txid + "'>" + date + "</a>";
+							row.insertCell(2).innerHTML = "<a href='https://livessl.reddcoin.com/tx/" + txDetails.txid + "'>" + date + "</a>";
 								row.cells[2].className = "tip_cell";
 							
 				    		sortTable("mytxdata");
