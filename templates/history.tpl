@@ -97,7 +97,7 @@ var walletAddress = $.get(RELATIVE_PATH + '/api/crypto', {}, function(addressDat
 						//console.log('get transaction details: ' + key + " : " + value);
 						var transDetails;
 						
-						$.get("https://livessl.reddcoin.com:80/api/tx/" + value, function(txDetails,exp){
+						$.get("https://livessl.reddcoin.com:443/api/tx/" + value, function(txDetails,exp){
 							
 							//console.log('txDetails = ' + txDetails.time);
 						
