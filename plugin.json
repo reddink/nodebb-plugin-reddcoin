@@ -21,7 +21,7 @@
 			"hook": "static:app.load", "method": "init"
 		},
 		{
-			"hook": "filter:user.settings", "method": "addUserSettings"
+			"hook": "filter:user.customSettings", "method": "addUserSettings"
 		},
 		{
 			"hook": "filter:user.getSettings", "method": "getUserSettings"
