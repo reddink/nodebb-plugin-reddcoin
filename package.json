@@ -1,6 +1,6 @@
 {
   "name": "nodebb-plugin-reddcoin",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Reddcoin Tipping Plugin",
   "main": "library.js",
   "scripts": {
@@ -29,7 +29,7 @@
     "url": "https://github.com/reddink/nodebb-plugin-reddcoin/issues"
   },
   "nbbpm": {
-    "compatibility": "^0.6.0 || ^0.7.0 || ^0.8.0 || ^0.9.0"
+    "compatibility": "^0.6.0 || ^0.7.0 || ^0.8.0 || ^0.9.0 || ^1.0.0"
   },
   "homepage": "https://github.com/reddink/nodebb-plugin-reddcoin"
 }
